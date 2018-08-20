@@ -5,11 +5,12 @@ from sklearn.model_selection import train_test_split
 
 train_df = pd.read_csv('./data/train.csv')
 
-def split_train_test(df):
+
+def split_train_test(df, test_size=0.25):
   y_label = 'SalePrice'
   df_y = df[y_label]
   df_X = df.drop(y_label, axis=1)
-  return train_test_split(df_X, df_y)
+  return train_test_split(df_X, df_y, test_size=test_size)
 
 
 test_df = pd.read_csv('./data/test.csv')
