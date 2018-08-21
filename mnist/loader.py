@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 import datetime
+import kaggle
 
 
 def load_data():
@@ -20,10 +21,12 @@ def load_data():
   return X_train, y_train, X_valid, y_valid, X_test
 
 
-# y_pred = np.zeros(test_df.shape[0]).astype(np.int32)
+y_pred = np.zeros(2).astype(np.int32)
+
 def create_submission(y_pred):
-  result = pd.DataFrame({'Label': y_pred})
+  result = pd.DataFrame({"ImageId": np.arange(1, y_pred.shape[0] + 1), 'Label': y_pred})
   now = datetime.datetime.today().strftime('%Y-%m-%d_%H:%M')
   file_name = './submissions/result' + now + '.csv'
-  result.to_csv(file_name, index=True)
+  result.to_csv(file_name, index=False)
 
+create_submission(y_pred)
